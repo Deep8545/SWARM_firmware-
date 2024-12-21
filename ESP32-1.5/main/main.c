@@ -287,7 +287,7 @@ int init_wifi_clientmode() {
     wifi_config_t wifi_config = {
             .sta = {
                     .ssid = "Hellfire_Swarm",
-                    .password = "auxobit",
+                    .password = "auxobit2171",
                     .threshold.authmode = WIFI_AUTH_WEP
             },
     };
@@ -443,7 +443,7 @@ void app_main() {
             esp_netif_destroy_default_wifi(esp_default_netif);
             ESP_ERROR_CHECK(esp_wifi_stop());
             strncpy((char *) DEFAULT_SSID, "Failsafe Hellfire_Swarm", sizeof(DEFAULT_SSID));
-            strncpy((char *) DEFAULT_PWD, "auxobit", sizeof(DEFAULT_PWD));
+            strncpy((char *) DEFAULT_PWD, "auxobit2171", sizeof(DEFAULT_PWD));
             init_wifi_apmode(DB_WIFI_MODE_AP);
         }
     }
