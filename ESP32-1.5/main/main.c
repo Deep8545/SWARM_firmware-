@@ -46,7 +46,7 @@ static const char *TAG = "DB_ESP32";
 
 uint8_t DB_WIFI_MODE = DB_WIFI_MODE_AP; // 1=Wifi AP mode, 2=Wifi client mode, 3=ESP-NOW LR Mode
 uint8_t DEFAULT_SSID[32] = "Hellfire_Swarm";
-uint8_t DEFAULT_PWD[64] = "auxobit";
+uint8_t DEFAULT_PWD[64] = "auxobit2171";
 char DEFAULT_AP_IP[32] = "192.168.2.1";
 char CURRENT_CLIENT_IP[32] = "192.168.2.1";
 uint8_t DEFAULT_CHANNEL = 6;
