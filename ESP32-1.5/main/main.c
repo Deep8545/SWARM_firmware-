@@ -450,7 +450,7 @@ void app_main() {
 
     start_mdns_service();
     netbiosns_init();
-    netbiosns_set_name("Hellfire_Swarm for ESP32");
+    netbiosns_set_name("Hellfire_Swarm");
 
     ESP_ERROR_CHECK(init_fs());
     control_module();
