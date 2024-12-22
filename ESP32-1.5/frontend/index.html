@@ -2,7 +2,7 @@
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="content-type" content="text/javascript">
-    <meta name="description" content="Settings for DB for ESP32">
+    <meta name="description" content="Settings for ESP32">
     <meta name="author" content="Wolfgang Christl">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DB for ESP32 Settings</title>
@@ -88,9 +88,7 @@
                     <select id="esp32_mode" name="esp32_mode" form="settings_form" onchange="change_ap_ip_visibility()">
                         <option value="1">WiFi Access Point Mode</option>
                         <option value="2">WiFi Client Mode</option>
-<!--                        <option value="3">ESP-NOW Access Point Mode</option>-->
                     </select>
-                   
                 </div>
             </div>
             <div class="row">
@@ -103,7 +101,12 @@
                     <input type="text" name="wifi_pass" value="" id="wifi_pass">
                 </div>
             </div>
-           
+            <div class="row">
+                <div id="ap_channel_div" class="twelve columns">
+                    <label for="ap_channel">Channel</label>
+                    <input type="text" name="ap_channel" value="" id="ap_channel">
+                </div>
+            </div>
             <h3>Serial</h3>
             <div class="row">
                 <div class="six columns">
@@ -160,8 +163,7 @@
 </div>
 <div class="container">
     <div id="about" style="margin-top: 1rem" class="row">Hellfire Swarm for ESP32 - waiting for a response from the ESP32
-    </div>
-    
+    </div> 
 </div>
 <script>
     // get settings once upon page load

@@ -1,21 +1,4 @@
-/*
- *   This file is part of DroneBridge: https://github.com/DroneBridge/ESP32
- *
- *   Copyright 2018 Wolfgang Christl
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
- *
- */
+
 
 #include <stdio.h>
 #include <nvs_flash.h>
@@ -42,11 +25,11 @@
 
 #define NVS_NAMESPACE "settings"
 
-static const char *TAG = "DB_ESP32";
+static const char *TAG = "Hellfire_ESP32";
 
 uint8_t DB_WIFI_MODE = DB_WIFI_MODE_AP; // 1=Wifi AP mode, 2=Wifi client mode, 3=ESP-NOW LR Mode
 uint8_t DEFAULT_SSID[32] = "Hellfire_Swarm";
-uint8_t DEFAULT_PWD[64] = "dronebridge";
+uint8_t DEFAULT_PWD[64] = "hellfire_swarm";
 char DEFAULT_AP_IP[32] = "192.168.2.1";
 char CURRENT_CLIENT_IP[32] = "192.168.2.1";
 uint8_t DEFAULT_CHANNEL = 6;
@@ -143,12 +126,12 @@ void start_mdns_service() {
         return;
     }
     ESP_ERROR_CHECK(mdns_hostname_set("hellfire"));
-    ESP_ERROR_CHECK(mdns_instance_name_set("hellfire"));
+    ESP_ERROR_CHECK(mdns_instance_name_set("Hellfire for ESP32"));
 
     ESP_ERROR_CHECK(mdns_service_add(NULL, "_http", "_tcp", 80, NULL, 0));
     ESP_ERROR_CHECK(mdns_service_add(NULL, "_db_proxy", "_tcp", APP_PORT_PROXY, NULL, 0));
     ESP_ERROR_CHECK(mdns_service_add(NULL, "_db_comm", "_tcp", APP_PORT_COMM, NULL, 0));
-    ESP_ERROR_CHECK(mdns_service_instance_name_set("_http", "_tcp", "Hellfire_Swarm for ESP32"));
+    ESP_ERROR_CHECK(mdns_service_instance_name_set("_http", "_tcp", "Hellfire for ESP32"));
     ESP_LOGI(TAG, "MDNS Service started!");
 }
 
@@ -224,13 +207,13 @@ void init_wifi_apmode(int wifi_mode) {
 
     wifi_config_t wifi_config = {
             .ap = {
-                    .ssid = "Hellfire_Swarm for ESP32_init",
+                    .ssid = "Hellfire_ESP32_Init",
                     .ssid_len = 0,
                     .authmode = WIFI_AUTH_WPA2_PSK,
                     .channel = DEFAULT_CHANNEL,
                     .ssid_hidden = 0,
                     .beacon_interval = 100,
-                    .max_connection = 10
+                    // .max_connection = 10
             },
     };
     strncpy((char *)wifi_config.ap.ssid, (char *)DEFAULT_SSID, 32);
@@ -286,8 +269,8 @@ int init_wifi_clientmode() {
 
     wifi_config_t wifi_config = {
             .sta = {
-                    .ssid = "Hellfire_Swarm",
-                    .password = "dronebridge",
+                    .ssid = "Hellfire_ESP32_Init",
+                    .password = "hellfire_swarm",
                     .threshold.authmode = WIFI_AUTH_WEP
             },
     };
@@ -442,15 +425,15 @@ void app_main() {
             ESP_ERROR_CHECK(esp_event_loop_delete_default());
             esp_netif_destroy_default_wifi(esp_default_netif);
             ESP_ERROR_CHECK(esp_wifi_stop());
-            strncpy((char *) DEFAULT_SSID, "Failsafe Hellfire_Swarm", sizeof(DEFAULT_SSID));
-            strncpy((char *) DEFAULT_PWD, "dronebridge", sizeof(DEFAULT_PWD));
+            strncpy((char *) DEFAULT_SSID, "Failsafe hellfire ESP32", sizeof(DEFAULT_SSID));
+            strncpy((char *) DEFAULT_PWD, "hellfire_swarm", sizeof(DEFAULT_PWD));
             init_wifi_apmode(DB_WIFI_MODE_AP);
         }
     }
 
     start_mdns_service();
     netbiosns_init();
-    netbiosns_set_name("Hellfire_Swarm");
+    netbiosns_set_name("hellfire");
 
     ESP_ERROR_CHECK(init_fs());
     control_module();
