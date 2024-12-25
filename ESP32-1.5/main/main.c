@@ -46,7 +46,7 @@ static const char *TAG = "DB_ESP32";
 
 uint8_t DB_WIFI_MODE = DB_WIFI_MODE_AP; // 1=Wifi AP mode, 2=Wifi client mode, 3=ESP-NOW LR Mode
 uint8_t DEFAULT_SSID[32] = "Hellfire_Swarm";
-uint8_t DEFAULT_PWD[64] = "dronebridge";
+uint8_t DEFAULT_PWD[64] = "hellfire";
 char DEFAULT_AP_IP[32] = "192.168.2.1";
 char CURRENT_CLIENT_IP[32] = "192.168.2.1";
 uint8_t DEFAULT_CHANNEL = 6;
@@ -287,7 +287,7 @@ int init_wifi_clientmode() {
     wifi_config_t wifi_config = {
             .sta = {
                     .ssid = "Hellfire_Swarm",
-                    .password = "dronebridge",
+                    .password = "hellfire",
                     .threshold.authmode = WIFI_AUTH_WEP
             },
     };
@@ -443,14 +443,14 @@ void app_main() {
             esp_netif_destroy_default_wifi(esp_default_netif);
             ESP_ERROR_CHECK(esp_wifi_stop());
             strncpy((char *) DEFAULT_SSID, "Failsafe Hellfire_Swarm", sizeof(DEFAULT_SSID));
-            strncpy((char *) DEFAULT_PWD, "dronebridge", sizeof(DEFAULT_PWD));
+            strncpy((char *) DEFAULT_PWD, "hellfire", sizeof(DEFAULT_PWD));
             init_wifi_apmode(DB_WIFI_MODE_AP);
         }
     }
 
     start_mdns_service();
     netbiosns_init();
-    netbiosns_set_name("Hellfire_Swarm");
+    netbiosns_set_name("Hellfire");
 
     ESP_ERROR_CHECK(init_fs());
     control_module();
